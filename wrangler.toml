@@ -1,22 +1,37 @@
-name = "get-focus-api"
-compatibility_date = "2023-12-01"
+
+name = "leamsp-api"
+main = "src/index.ts"
+compatibility_date = "2025-07-31"
 compatibility_flags = ["nodejs_compat"]
 
+# Build configuration
+[build]
+# Use the default worker build process
+command = ""
+
+# Environment variables for all environments
 [vars]
-JWT_SECRET = "my-variable"
+ENVIRONMENT = "development"
 
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-# [[r2_buckets]]
-# binding = "MY_BUCKET"
-# bucket_name = "my-bucket"
-
+# D1 Database configuration
 [[d1_databases]]
 binding = "DB"
-database_name = "get-focus-db"
-database_id = "64af7aca-1551-4447-8456-b690a783df65"
+database_name = "leamsp-db"
+database_id = "03424b8b-54a4-4c29-8e82-9e50330613f2"
+migrations_dir = "migrations"
 
-# [ai]
-# binding = "AI"
+# Production environment
+[env.production]
+name = "leamsp-api"
+workers_dev = true
+
+[env.production.vars]
+ENVIRONMENT = "production"
+
+# Development environment
+[env.development]
+name = "leamsp-api-dev"
+workers_dev = true
+
+[env.development.vars]
+ENVIRONMENT = "development"

@@ -1,7 +1,7 @@
 import db from "~/db";
 import Response from "~/utils/response";
 import { z } from "zod";
-import { hashSync } from "bcrypt-edge";
+import { hashSync } from "bcrypt-ts";
 import validationMiddleware from "~/middleware/validationMiddleware";
 import App from "~/app";
 

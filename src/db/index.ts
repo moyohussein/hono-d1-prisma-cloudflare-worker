@@ -4,7 +4,7 @@ import { Bindings } from "~/types";
 
 const db = (env: Bindings) => {
   const adapter = new PrismaD1(env.DB);
-  const prisma = new PrismaClient({ adapter, errorFormat: "minimal" });
+  const prisma = new PrismaClient({ adapter, errorFormat: "pretty" });
   return prisma;
 };
 

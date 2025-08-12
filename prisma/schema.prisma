@@ -15,10 +15,53 @@ datasource db {
 }
 
 model Users {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  name     String
-  password String
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
+  name          String
+  password      String
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  emailVerified DateTime?
+  deletedAt     DateTime?
+  tokens        Tokens[]
+  idCards       IdCards[]
 
   @@map("users")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Tokens {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  type      String    // 'verify' | 'reset'
+  tokenHash String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("tokens")
+  @@index([userId, type])
+}
+
+model IdCards {
+  id          Int       @id @default(autoincrement())
+  userId      Int       @map("user_id")
+  displayName String    @map("display_name")
+  attributes  Json
+  imageUrl    String?   @map("image_url")
+  publicId    String?   @map("public_id")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("id_cards")
+  @@index([userId])
 }

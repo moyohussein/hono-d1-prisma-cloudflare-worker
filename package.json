@@ -1,19 +1,26 @@
 {
+  "name": "leamsp-api",
+  "version": "1.0.0",
   "scripts": {
     "dev": "wrangler dev src/index.ts",
-    "deploy": "wrangler deploy --minify src/index.ts"
+    "deploy": "wrangler deploy --minify src/index.ts",
+    "test:email-verification": "tsx scripts/test-email-verification.ts",
+    "test:password-reset": "tsx scripts/test-password-reset.ts"
   },
   "dependencies": {
-    "@hono/zod-validator": "^0.2.2",
-    "@prisma/adapter-d1": "^5.15.0",
-    "@prisma/client": "^5.15.0",
-    "bcrypt-edge": "^0.0.6",
-    "hono": "^4.4.2",
+    "@getbrevo/brevo": "^3.0.1",
+    "@hono/zod-validator": "^0.7.2",
+    "@prisma/adapter-d1": "^6.13.0",
+    "@prisma/client": "^6.13.0",
+    "bcrypt-ts": "^7.1.0",
+    "hono": "^4.9.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240529.0",
-    "@types/bcrypt": "^5.0.2",
-    "wrangler": "^3.57.2"
+    "@cloudflare/workers-types": "^4.20250810.0",
+    "@types/node": "^24.2.1",
+    "dotenv": "^17.2.1",
+    "tsx": "^4.20.3",
+    "wrangler": "^4.28.1"
   }
 }
